@@ -33,9 +33,9 @@ include __DIR__ . '/partials/functions.php';
 
 <body>
  <div class="container text-primary align-content-center mb-5 ">
-  <h1>Password-Generator</h1>
+  <h1>Password-Generator:</h1>
 </div>
-  <div class="container text- bg-secondary py-5 rounded-4">
+  <div class="container text-white bg-secondary py-5 rounded-4">
     <form action="" method="get">
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>

@@ -35,7 +35,7 @@ include __DIR__ . '/partials/functions.php';
 
   <h1>Password-Generator</h1>
 
-  <div class="container">
+  <div class="container text-bg-secondary py-5 rounded-4">
     <form action="" method="get">
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>
@@ -44,7 +44,7 @@ include __DIR__ . '/partials/functions.php';
         <button type="submit" class="btn btn-primary">Send</button>
     </form>
 
-      <div class="text-center">Generated password: 
+      <div class="text-center text-black  my-3 bg-light py-2 rounded-3 ">Generated password: 
         <h3><?= genPassword() ?></h3>
       </div>
   </div>

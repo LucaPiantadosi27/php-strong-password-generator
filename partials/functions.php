@@ -1,7 +1,7 @@
 
 <?php
 
-var_dump($_GET['password']);
+// var_dump($_GET['password']);
 
 function genPassword()
 {

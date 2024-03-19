@@ -10,6 +10,29 @@ Milestone 4 (BONUS)
 Gestire ulteriori parametri per la password: quali caratteri usare fra numeri, lettere e simboli. Possono essere scelti singolarmente (es. solo numeri) oppure possono essere combinati fra loro (es. numeri e simboli, oppure tutti e tre insieme).
 Dare all’utente anche la possibilità di permettere o meno la ripetizione di caratteri uguali. -->
 
+<?php
+
+var_dump($_GET['password']);
+
+function genPassword()
+{
+    $genPassword = '';
+    $characters = 'abcdefghilMNOPQRST0123456789@&$=!#*%+/';
+
+    for ($i = 0; $i < strlen(trim($_GET['password'])); $i++) {
+        $n = rand(0, strlen($characters) - 1);
+        $genPassword = $genPassword . $characters[$n];
+    }
+    return $genPassword;
+}
+
+//var_dump(genPassword());
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,20 +46,26 @@ Dare all’utente anche la possibilità di permettere o meno la ripetizione di c
 
 <body>
 
-<h1>Password-Generator</h1>
+  <h1>Password-Generator</h1>
 
-
-<body>
-    <div class="container">
-        <form>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" name="password" id="password" placeholder="" />
-            </div>
-            <button type="submit" class="btn btn-primary">Send</button>
-        </form>
+  <div class="container">
+    <form action="" method="get">
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" name="password" id="password" placeholder="" />
         </div>
-    </div>
+        <button type="submit" class="btn btn-primary">Send</button>
+    </form>
+
+      <div class="text-center">Generated password: 
+        <h3><?= genPassword() ?></h3>
+      </div>
+  </div>
+
+
+</body>
+
+</html>
 
 <!-- Bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

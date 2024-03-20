@@ -1,60 +1,75 @@
-<!-- 
-Milestone 1
-Creare un form che invii in GET la lunghezza della password. Una nostra funzione utilizzerà questo dato per generare una password casuale (composta da lettere maiuscole, lettere minuscole, numeri e simboli) da restituire all’utente.
-Scriviamo tutto (logica e layout) in un unico file index.php
-Milestone 2
-Verificato il corretto funzionamento del nostro codice, spostiamo la logica in un file functions.php che includeremo poi nella pagina principale
-Milestone 3 (BONUS)
-Invece di visualizzare la password nella index, effettuare un redirect ad una pagina dedicata che tramite $_SESSION recupererà la password da mostrare all’utente.
-Milestone 4 (BONUS)
-Gestire ulteriori parametri per la password: quali caratteri usare fra numeri, lettere e simboli. Possono essere scelti singolarmente (es. solo numeri) oppure possono essere combinati fra loro (es. numeri e simboli, oppure tutti e tre insieme).
-Dare all’utente anche la possibilità di permettere o meno la ripetizione di caratteri uguali. -->
+<?php 
 
+include './partials/functions.php';
 
+// preparo una variabile che conterrà il numero di caratteri (se indicato)
+$passwordLength = null;
 
-<!-- Includes -->
- <?php
-include __DIR__ . '/partials/functions.php';
+// controllo se è settato il parametro 
+if (isset($_GET['passwordCharacters']) && $_GET['passwordCharacters'] != '' ) {
+
+    $generatedPassword = generatePassword($_GET['passwordCharacters']);
+
+    // sovrascrivo la variabile con il numero di caratteri
+    $passwordLength = $_GET['passwordCharacters'];
+}
+
 ?>
- 
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
+    <title>PHP - Strong Password Generator</title>
+
+    <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>Password-Generator</title>
+
 </head>
-
-
 <body>
- <div class="container text-primary align-content-center mb-5 ">
-  <h1>Password-Generator:</h1>
-</div>
-  <div class="container text-white bg-secondary py-5 rounded-4">
-    <form action="" method="get">
-        <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" name="password" id="password" placeholder="" />
-        </div>
-        <button type="submit" class="btn btn-primary">Send</button>
-    </form>
+    
+    <div class="container py-5 bg-dark-subtle mt-5 rounded 2">
+        <h1>Strong Password Generator</h1>
 
-      <div class="text-center text-black  my-3 bg-light py-2 rounded-3 ">Generated password: 
-        <h3><?= genPassword() ?></h3>
-      </div>
-  </div>
+        <form action="" class="mb-5">
 
+            <div class="mb-3">
 
-</body>
+                <label for="passwordCharacters">Numero di caratteri</label>
+                <input 
+                    name="passwordCharacters" 
+                    id="passwordCharacters" 
+                    type="number" 
+                    placeholder="N°"
+                    value="<?php echo $passwordLength ?>"
+                >
 
-</html>
+            </div>
 
-<!-- Bootstrap -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+            <button type="submit">Genera</button>
+
+        </form>
+
+        <?php 
+        
+        if (isset($generatedPassword)) {
+            // la password è stata creata
+            ?>
+
+            <div id="generatedPassword" class="text-center bg-primary text-white p-4 border-2 border border-dark rounded-4">
+                <h2 class="mb-4">Password generata:</h2>
+
+                <pre><?php echo $generatedPassword ?></pre>
+            </div>
+
+            <?php
+        }
+
+        ?>
+        
+    </div>
+
+    <!-- bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -1,20 +1,21 @@
-
 <?php
 
-// var_dump($_GET['password']);
+function generatePassword($characterNumber) {
+    $passwordCharacters = $_GET['passwordCharacters'];
 
-function genPassword()
-{
-    $genPassword = '';
-    $characters = 'abcdefghilMNOPQRST0123456789@&$=!#*%+/';
+    // array con tutti i simboli
+    $characters = range('A', 'z');
 
-    for ($i = 0; $i < strlen(trim($_GET['password'])); $i++) {
-        $n = rand(0, strlen($characters) - 1);
-        $genPassword = $genPassword . $characters[$n];
+    // generare una lista di N caratteri presi casualmente dall'array appena creato
+    
+    $generatedPassword = "";
+
+    for($i = 0; $i < $characterNumber; $i++) {
+
+        // sto facendo N iterazioni
+        $generatedPassword .= $characters[ rand(0, count($characters) - 1) ];
+        
     }
-    return $genPassword;
+
+    return $generatedPassword;
 }
-
-//var_dump(genPassword());
-
-?>
